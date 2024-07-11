@@ -29,17 +29,20 @@ $(OBJS_BONUS_DIR)%.o: $(BONUS_SRCS_DIR)%.c
 	mkdir -p $(OBJS_BONUS_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-.PHONY: all clean fclean re bonus libft
+.PHONY: all clean fclean re bonus libft minilibx-linux
 
-all: libft $(NAME)
+all: libft minilibx-linux $(NAME)
 
 libft:
 	$(MAKE) -C LIBFT
 
+minilibx-linux:
+	$(MAKE) -C minilibx-linux
+
 $(NAME): $(OBJS)
 	$(CC) $(OBJS) $(LDFLAGS) -o $(NAME)
 
-bonus: libft $(NAME_BONUS)
+bonus: libft minilibx-linux $(NAME_BONUS)
 
 $(NAME_BONUS): $(OBJS_BONUS)
 	$(CC) $(OBJS_BONUS) $(LDFLAGS) -o $(NAME_BONUS)
@@ -47,9 +50,11 @@ $(NAME_BONUS): $(OBJS_BONUS)
 clean:
 	$(RM) -r $(OBJS_DIR) $(OBJS_BONUS_DIR)
 	$(MAKE) -C LIBFT clean
+	$(MAKE) -C minilibx-linux clean
 
 fclean: clean
 	$(RM) $(NAME) $(NAME_BONUS)
 	$(MAKE) -C LIBFT fclean
+	$(MAKE) -C minilibx-linux clean
 
 re: fclean all
