@@ -2,7 +2,7 @@ NAME = so_long
 NAME_BONUS = so_long_bonus
 CC = clang
 CFLAGS = -Wall -Wextra -Werror
-LDFLAGS = -L./LIBFT -lft -L./minilibx-linux -lmlx -lXext -lX11
+LDFLAGS = -L./LIBFT -lft -L./minilibx-linux -lmlx -lXext -lX11 -lm -lz
 RM = rm -f
 
 SRCS_DIR = ./srcs/
@@ -21,23 +21,18 @@ SRCS_BONUS = $(addprefix $(BONUS_SRCS_DIR), so_long_bonus.c ft_check_map_bonus.c
 OBJS = $(SRCS:$(SRCS_DIR)%.c=$(OBJS_DIR)%.o)
 OBJS_BONUS = $(SRCS_BONUS:$(BONUS_SRCS_DIR)%.c=$(OBJS_BONUS_DIR)%.o)
 
+# Rule to create object files
 $(OBJS_DIR)%.o: $(SRCS_DIR)%.c
 	mkdir -p $(OBJS_DIR)
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -I/usr/include -I./minilibx-linux -O3 -c $< -o $@
 
 $(OBJS_BONUS_DIR)%.o: $(BONUS_SRCS_DIR)%.c
 	mkdir -p $(OBJS_BONUS_DIR)
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -I/usr/include -I./minilibx-linux -O3 -c $< -o $@
 
 .PHONY: all clean fclean re bonus libft minilibx-linux
 
 all: libft minilibx-linux $(NAME)
-
-libft:
-	$(MAKE) -C LIBFT
-
-minilibx-linux:
-	$(MAKE) -C minilibx-linux
 
 $(NAME): $(OBJS)
 	$(CC) $(OBJS) $(LDFLAGS) -o $(NAME)
@@ -46,6 +41,16 @@ bonus: libft minilibx-linux $(NAME_BONUS)
 
 $(NAME_BONUS): $(OBJS_BONUS)
 	$(CC) $(OBJS_BONUS) $(LDFLAGS) -o $(NAME_BONUS)
+
+libft: LIBFT/libft.a
+
+LIBFT/libft.a:
+	$(MAKE) -C LIBFT
+
+minilibx-linux: minilibx-linux/libmlx.a
+
+minilibx-linux/libmlx.a:
+	$(MAKE) -C minilibx-linux
 
 clean:
 	$(RM) -r $(OBJS_DIR) $(OBJS_BONUS_DIR)
