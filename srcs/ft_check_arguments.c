@@ -33,11 +33,21 @@ void ft_init_map(t_game *game, char *av)
         game->rows++;
     }
     close(fd);
+    ft_check_and_split_map(game, map_line);
+    ft_init_vars(game);
+}
+
+void ft_check_and_split_map(t_game *game, char *map_line)
+{
     ft_check_empty_lines(game, map_line);
+    if (ft_strlen(map_line) == 0)
+    {
+        free(map_line);
+        ft_error_game("Map file is empty", game);
+    }
     game->map = ft_split(map_line, '\n');
     game->map_alloc = 1;
     free(map_line);
-    ft_init_vars(game);
 }
 
 void ft_check_empty_lines(t_game *game, char *map_line)

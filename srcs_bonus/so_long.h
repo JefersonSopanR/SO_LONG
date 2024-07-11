@@ -94,6 +94,7 @@ typedef struct s_game
 	t_position	player;
 }		t_game;
 
+void ft_check_and_split_map(t_game *game, char *map_line);
 void	ft_check_player_side(t_game *game, int y, int x);
 int		ft_loss(t_game *game);
 void    ft_check_arguments(int ac, char **av, t_game *game);

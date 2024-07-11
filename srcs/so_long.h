@@ -90,6 +90,7 @@ typedef struct s_game
 	t_position	player;
 }		t_game;
 
+void 	ft_check_and_split_map(t_game *game, char *map_line);
 void    ft_check_arguments(int ac, char **av, t_game *game);
 void    ft_init_map(t_game *game, char *av);
 void    ft_check_empty_lines(t_game *game, char *map_line);
