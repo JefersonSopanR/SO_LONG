@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_handle_input.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jesopan- <jesopan-@student.42malaga.com>   #+#  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024-07-23 05:20:32 by jesopan-          #+#    #+#             */
+/*   Updated: 2024-07-23 05:20:32 by jesopan-         ###   ########ç         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 int	ft_handle_input(int keysym, t_game *game)
@@ -23,7 +35,7 @@ void	ft_move_player(t_game *game, int new_y, int new_x, int player_side)
 	int	last_x;
 	int	last_y;
 
-	game->player_side =  player_side;
+	game->player_side = player_side;
 	last_x = game->player.x;
 	last_y = game->player.y;
 	if (game->map[new_y][new_x] == EXIT && game->coins == 0)

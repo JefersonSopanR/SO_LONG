@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_close_game.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jesopan- <jesopan-@student.42malaga.com>   #+#  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024-07-23 05:19:45 by jesopan-          #+#    #+#             */
+/*   Updated: 2024-07-23 05:19:45 by jesopan-         ###   ########ç         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 int	ft_victory(t_game *game)
@@ -18,15 +30,15 @@ int	ft_close_game(t_game *game)
 
 int	ft_error_game(char *msg, t_game *game)
 {
-    int i;
+	int	i;
 
-    i = 0;
+	i = 0;
 	if (game->map_alloc == 1)
 	{
-        while (i < game->rows)
-		    free(game->map[i++]);
-	    free(game->map);
-    }
+		while (i < game->rows)
+			free(game->map[i++]);
+		free(game->map);
+	}
 	free(game);
 	ft_printf("Error\n""%s\n", msg);
 	exit (EXIT_FAILURE);
@@ -34,10 +46,10 @@ int	ft_error_game(char *msg, t_game *game)
 
 void	ft_free_all_allocated_memory(t_game *game)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (i < game->rows)
+	i = 0;
+	while (i < game->rows)
 		free(game->map[i++]);
 	free(game->map);
 	mlx_destroy_image(game->mlx_ptr, game->wall.xpm_ptr);

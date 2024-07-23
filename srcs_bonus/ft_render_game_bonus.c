@@ -1,33 +1,45 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_render_game_bonus.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jesopan- <jesopan-@student.42malaga.com>   #+#  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024-07-23 05:38:27 by jesopan-          #+#    #+#             */
+/*   Updated: 2024-07-23 05:38:27 by jesopan-         ###   ########ç         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
-int    ft_render_game(t_game *game)
+int	ft_render_game(t_game *game)
 {
-    char    *movements;
-    char    *line;
-    int     y;
-    int     x;
+	char	*movements;
+	char	*line;
+	int		y;
+	int		x;
 
-    y = 0;
-    while (game->map[y])
-    {
-        x = 0;
-        while (game->map[y][x])
-        {
-            ft_identify_sprite(game, game->map[y][x], y, x);
-            x++;
-        }
-        y++;
-    }
-    movements = ft_itoa(game->movements);
-    line = ft_strjoin("Movements: ", movements);
-    mlx_string_put(game->mlx_ptr, game->win_ptr, 40, 20, 0xFFFFFF, line);
+	y = 0;
+	while (game->map[y])
+	{
+		x = 0;
+		while (game->map[y][x])
+		{
+			ft_identify_sprite(game, game->map[y][x], y, x);
+			x++;
+		}
+		y++;
+	}
+	movements = ft_itoa(game->movements);
+	line = ft_strjoin("Movements: ", movements);
+	mlx_string_put(game->mlx_ptr, game->win_ptr, 40, 20, 0xFFFFFF, line);
 	free(movements);
 	free(line);
 	return (0);
 }
 
 void	ft_identify_sprite(t_game *game, char character, int y, int x)
-{	
+{
 	if (character == WALL)
 		ft_render_sprite(game, game->wall, y, x);
 	else if (character == GRASS)
@@ -66,6 +78,6 @@ void	ft_render_sprite(t_game *game, t_image sprite, int y, int x)
 
 	col = x * sprite.x;
 	row = y * sprite.y;
-	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, sprite.xpm_ptr, col, row);
+	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, sprite.xpm_ptr, col, \
+	row);
 }
-

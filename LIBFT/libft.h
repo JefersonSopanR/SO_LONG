@@ -72,11 +72,10 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 char	*get_next_line(int fd);
 int		ft_print_chr(int c);
 int		ft_print_str(char *str);
-int	ft_print_num(long n, int base);
-int	ft_print_void(unsigned long long ptr);
-int	ft_print_bigx(long n, int base);
-int	print_format(char specifier, va_list arg);
-int	ft_printf(const char *format, ...);
-
+int		ft_print_num(long n, int base);
+int		ft_print_void(unsigned long long ptr);
+int		ft_print_bigx(long n, int base);
+int		print_format(char specifier, va_list arg);
+int		ft_printf(const char *format, ...);
 
 #endif
